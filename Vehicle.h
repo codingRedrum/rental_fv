@@ -11,12 +11,27 @@
 #include "LoadData.h"
 
 using namespace std;
-
 static int _numberOfCars{ 0 };
+
+typedef struct TypeOfVehicle {
+	virtual string vehicleType() = 0;
+} ToV;
+
+struct Sport : public ToV {
+	virtual string vehicleType()  {
+		return "sport ";
+	}
+};
+
+struct Comfort : public ToV {
+	virtual string vehicleType()  {
+		return "comfort ";
+	}
+};
+
 
 class Vehicle {
 public:
-	
 	virtual auto createVehicleList() -> void = 0;
     virtual auto addVehicle() -> void = 0;
 	virtual auto removeVehicle() -> void = 0;
@@ -27,7 +42,10 @@ public:
     virtual auto showHiddenDetailsSportCar(size_t numb) -> void = 0;
 	virtual auto loadData()-> void = 0;
 	virtual auto checkDB() -> void = 0;
+	virtual auto showTypeOfCar() -> void = 0;
 	Vehicle() = default;
+protected:
+	ToV* vehicleType;
     
 private:
 	int _ID;
@@ -36,7 +54,9 @@ private:
 class Car : public Vehicle {
 	friend class LoadData;
 public:
-	Car() : Vehicle(), _ID{ 0 }, _howMany{ 0 }, _sportCar{nullptr} {};
+	Car() : Vehicle(), _ID{ 0 }, _howMany{ 0 }, _sportCar{nullptr} {
+		vehicleType = new Sport;
+	};
 	~Car();
 
 	virtual auto createVehicleList() -> void;
@@ -49,19 +69,20 @@ public:
     virtual auto showHiddenDetailsSportCar(size_t numb) -> void;
 	virtual auto loadData()-> void;
 	virtual auto checkDB() -> void;
+	virtual auto showTypeOfCar() -> void;
 
-	//Car& operator=(const Car& v) {
-	//	if (this != &v) {
-	//		delete[] _ptrSC;
-	//		_howMany = v._howMany;
+	Car& operator=(const Car& v) {
+		if (this != &v) {
+			delete[] _sportCar;
+			_howMany = v._howMany;
 
-	//		_ptrSC = new SportCar * [_howMany];
-	//		for (size_t i = 0; i < v._howMany; i++) {
-	//			_ptrSC[i] = v._ptrSC[i];
-	//		}
-	//		return *this;
-	//	}
-	//}
+			_sportCar = new SportCar * [_howMany];
+			for (size_t i = 0; i < v._howMany; i++) {
+				_sportCar[i] = v._sportCar[i];
+			}
+			return *this;
+		}
+	}
 
 private:
 	class SportCar {
@@ -92,9 +113,6 @@ private:
     int _ID;
     vector<string> _hiddenData {"mark", "model", "insurance type", "horse power"};
 };
-
-// konstruktor kopiujacy, przenoszay
-// operator przenoszacy []////
 
 
 #endif //VEHICLE_H

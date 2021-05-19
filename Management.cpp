@@ -78,7 +78,7 @@ auto Management::create(Customer* tab[]) -> void {
 }
 
 auto Management::returnCustomerType(Customer* wsk) -> void {
-    cout << wsk->returnTypeOfCustomer();
+    
 }
 
 auto Management::wecomeClassTypePriorCustomerData() ->void {

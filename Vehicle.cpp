@@ -138,6 +138,9 @@ auto Car::loadData()-> void {
     } 
 }
 
+auto Car::showTypeOfCar() -> void {
+    vehicleType->vehicleType();
+}
 
  auto Car::SportCar::setMark(string mark) -> void {
      this->_mark = mark;

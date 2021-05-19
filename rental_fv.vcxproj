@@ -140,9 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Customer.cpp" />
-    <ClCompile Include="Data.cpp" />
     <ClCompile Include="DynamicWelcomeScreen.cpp" />
-    <ClCompile Include="LoadData.cpp" />
     <ClCompile Include="LoadNumbers.cpp" />
     <ClCompile Include="Management.cpp" />
     <ClCompile Include="rental_fv.cpp" />
@@ -152,14 +150,11 @@
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Car.h" />
     <ClInclude Include="Customer.hpp" />
-    <ClInclude Include="Data.h" />
     <ClInclude Include="Database.h" />
     <ClInclude Include="DynamicMenu.h" />
     <ClInclude Include="DynamicWelcomeScreen.h" />
     <ClInclude Include="LoadData.h" />
-    <ClInclude Include="LoadNumbers.h" />
     <ClInclude Include="Management.hpp" />
     <ClInclude Include="test.hpp" />
     <ClInclude Include="Token.h" />

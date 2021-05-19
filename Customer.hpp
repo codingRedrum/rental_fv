@@ -5,57 +5,193 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Token.h"
 
 using namespace std;
 
-class  Customer {
+class Customer {
 protected:
-    string _name;
-    string _fName;
-    string _street;
+    string _imie;
+    string _nazwisko;
     string _city;
-    // typ klasy
-    
+    string _street;
+    string _login;
+    int _password;
+
 public:
-    Customer(): _name{"def"},_fName{"def"}, _street{"def"}, _city{"def"} {};
-    Customer(string name, string fName, string street, string city): _name{name},_fName{fName}, _street{street}, _city{city} {};
-    virtual ~Customer() {}
-    virtual bool returnTypeOfCustomer() = 0;
+    Customer() {
+
+    }
     virtual void addCustomer() = 0;
-    virtual void showGivenData() = 0;
     virtual void welcomePriorToShowedData() = 0;
+    virtual void showGivenData() = 0 {
+        cout << "\nPremium customer: \n"
+            << "Name: " << this->_imie << "\n"
+            << "Surname: " << this->_nazwisko << "\n"
+            << "Street: " << this->_street << "\n"
+            << "City: " << this->_city << "\n"
+            << endl;
+    }
+};
+
+class NormalCustomer : public Customer {
+public:
+    NormalCustomer() {
+        
+        this->_imie = "def";
+        this->_nazwisko = "def";
+        this->_login = "def"; 
+        this->_city = "def";
+        this->_street = "def";
+    };
+    // copy constructor
+    NormalCustomer(const NormalCustomer& cp) {
+        this->_imie = cp._imie;
+        this->_nazwisko = cp._nazwisko;
+        this->_login = cp._login;
+        this->_city = cp._city;
+        this->_street = cp._street;
+    };
+    // move constructor 
+    NormalCustomer(NormalCustomer&& mv) noexcept(true) {
+        this->_imie = mv._imie;
+        this->_nazwisko = mv._nazwisko;
+        this->_login = mv._login;
+        this->_city = mv._city;
+        this->_street =mv._street;
+    };
+    NormalCustomer(const string& fname, const string& secname, const string& login, const int& pass);
+
+    NormalCustomer& operator=(const NormalCustomer& cp) {
+        if (this != &cp) {
+            _imie = cp._imie;
+            _nazwisko = cp._nazwisko;
+            _login = cp._login;
+            _password = cp._password;
+            _city = cp._city;
+            _street = cp._street;
+        }
+    }
+    NormalCustomer&& operator=(const NormalCustomer&& mv) {
+        if (this != &mv) {
+            _imie = mv._imie;
+            _nazwisko = mv._nazwisko;
+            _login = mv._login;
+            _password = mv._password;
+            _city = mv._city;
+            _street = mv._street;
+        }
+    }
+
+     void addCustomer();
+     void showGivenData();
+     void welcomePriorToShowedData();
+
+private:
+    float _discount{ 24.33 };
+
 };
 
 class Premium : public Customer {
-    bool _classPREMIUM = true;
-    string _classType;
 public:
-    Premium(): Customer(), _classPREMIUM{true}, _classType{"premium"} {};
-    Premium(string name, string fName, string street, string city) : Customer( name, fName,  street, city), _classPREMIUM{true}, _classType{"premium"} {}
-    ~Premium() {}
-    
-    bool returnTypeOfCustomer();
-    virtual void addCustomer();
-    virtual void showGivenData();
-    virtual void welcomePriorToShowedData();
+    Premium() {
+
+        this->_imie = "def";
+        this->_nazwisko = "def";
+        this->_login = "def";
+        this->_city = "def";
+        this->_street = "def";
+    };
+    // copy constructor
+    Premium(const Premium& cp) {
+        this->_imie = cp._imie;
+        this->_nazwisko = cp._nazwisko;
+        this->_login = cp._login;
+        this->_city = cp._city;
+        this->_street = cp._street;
+    };
+    // move constructor 
+    Premium(Premium&& mv) noexcept(true) {
+        this->_imie = mv._imie;
+        this->_nazwisko = mv._nazwisko;
+        this->_login = mv._login;
+        this->_city = mv._city;
+        this->_street = mv._street;
+    };
+    Premium(const string& fname, const string& secname, const string& login, const int& pass);
+
+    Premium& operator=(const Premium& cp) {
+        if (this != &cp) {
+            _imie = cp._imie;
+            _nazwisko = cp._nazwisko;
+            _login = cp._login;
+            _password = cp._password;
+            _city = cp._city;
+            _street = cp._street;
+        }
+    }
+    Premium&& operator=(const Premium&& mv) {
+        if (this != &mv) {
+            _imie = mv._imie;
+            _nazwisko = mv._nazwisko;
+            _login = mv._login;
+            _password = mv._password;
+            _city = mv._city;
+            _street = mv._street;
+        }
+    }
+
+    void addCustomer();
+    void showGivenData();
+    void welcomePriorToShowedData();
+
+private:
+    float _discount{ 29.33 };
+
 };
 
 class VIP : public Customer {
-    string _classType;
-    bool _classVIP = true;
-    float _discount = 1241.34;
-    // dodatkowe 100 000 km + znizka
-
 public:
-    VIP() : Customer(), _classVIP{true}, _classType{"vip"}  {}
-    VIP(string name, string fName, string street, string city): Customer(name, fName, street, city), _classVIP{true} , _classType{"vip"} {}
-    ~VIP() {}
-    
-    bool returnTypeOfCustomer();
-    virtual void addCustomer();
-    virtual void showGivenData();
-    virtual void welcomePriorToShowedData();
+    VIP() {
 
+        this->_imie = "def";
+        this->_nazwisko = "def";
+        this->_login = "def";
+    };
+    // copy constructor
+    VIP(const VIP& cp) {
+        this->_imie = cp._imie;
+        this->_nazwisko = cp._nazwisko;
+        this->_login = cp._login;
+    };
+    // move constructor 
+    VIP(VIP&& mv) noexcept(true) {
+        this->_imie = mv._imie;
+        this->_nazwisko = mv._nazwisko;
+        this->_login = mv._login;
+    };
+    VIP(const string& fname, const string& secname, const string& login, const int& pass);
+
+    VIP& operator=(const VIP& cp) {
+        if (this != &cp) {
+            _imie = cp._imie;
+            _nazwisko = cp._nazwisko;
+            _login = cp._login;
+            _password = cp._password;
+        }
+    }
+    VIP&& operator=(const VIP&& mv) {
+        if (this != &mv) {
+            _imie = mv._imie;
+            _nazwisko = mv._nazwisko;
+            _login = mv._login;
+            _password = mv._password;
+        }
+    }
+
+    void addCustomer();
+    void showGivenData();
+    void welcomePriorToShowedData();
 };
 
 

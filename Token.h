@@ -19,7 +19,6 @@ public:
         os << "Generated token is: " << token->_pin << "\n";
         return os;
     }
-    
 };
 
 class Generator {
@@ -31,7 +30,6 @@ class Generator {
 
 public:
     Generator() {
-      
         _ptrToken = new Token**[_row];
         for (size_t i = 0; i < _row; i++) {
             _ptrToken[i] = new Token*[_column];
@@ -42,7 +40,6 @@ public:
             }
         }
         setNewToken();
-        
     }
 
     ~Generator() {
@@ -60,7 +57,5 @@ public:
         int _tmp = _token->getToken();
         return _tmp;
     }
-
-   
 };
 

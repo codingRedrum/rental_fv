@@ -45,6 +45,7 @@ public:
     auto choosedScreen(const char* txt, size_t rows, size_t columns) -> void;
     auto startDynamicMenu() -> void;
     auto deleteDynamicMEnu() -> void;
+
 };
 
 #endif /* Management_hpp */

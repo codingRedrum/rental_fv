@@ -1,21 +1,20 @@
 
-
 #include <iostream>
-#include "Car.h"
+
 #include "Customer.hpp"
-#include "Data.h"
 #include "Database.h"
 #include "Vehicle.h"
-#include <fstream>
-#include <string>
-
+#include "Token.h"
 #include "Management.hpp"
 
 using namespace std;
-
-
+Generator gen;
 
 int main() {
+
+    Generator::createToken();
+    Generator::addToken();
+
 
     srand(time(NULL));
 
