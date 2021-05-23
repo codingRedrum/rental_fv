@@ -3,6 +3,16 @@
 #include "Management.hpp"
 
 
+//auto Management::createVector(vector<Data*>& ex){
+//    ex.push_back(new LoadData);
+//}
+//
+//auto Management::deleteVector(vector<Data*>& ex){
+//    for(size_t i = 0; i < ex.size(); i++)		{
+//        delete ex[i];
+//    }
+//}
+
 auto Management::abstractArrayOfCustomer(Customer* tab[]) -> void {
     tab[0] = new Premium;
     tab[1] = new VIP;
@@ -122,6 +132,7 @@ auto Management::choosedScreen(const char* txt, size_t rows, size_t columns) -> 
     delete ptrDWS;
 }
 
+
 auto Management::startDynamicMenu() -> void {
     ptrDM = new DynamicMenu;
     ptrDM->getUserChoice(menuTab, 3);
@@ -129,4 +140,25 @@ auto Management::startDynamicMenu() -> void {
 
 auto Management::deleteDynamicMEnu() -> void {
     delete ptrDM;
+}
+
+////////////////////////// LOAD DATA ////////////////////////////////////
+
+auto Management::checkLogin() -> bool {
+    string tmpLogin;
+    cout << "Login: "; cin >> tmpLogin;
+    if(ptrDATA[0]->checingSystem(tmpLogin))	{
+        return true;
+    }
+    else	{
+        cout << "Apparently you aren't our customer. You can sign up. \n";
+        return false;
+    }
+}
+
+
+////////////////////////// STOP ////////////////////////////////////////
+auto summaryStop() -> void{
+    cout << "Thank you for choosing rental with us. \n"
+         << "We are hoping to see you soon! \n";
 }

@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
-
 #include "sql/sqlite3.h"
 
 using namespace std;

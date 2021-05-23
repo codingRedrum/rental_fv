@@ -11,6 +11,9 @@
 #include "DynamicWelcomeScreen.h"
 #include "DynamicMenu.h"
 #include "Vehicle.h"
+#include "LoadData.h"
+
+extern Data* ptrDATA[2];
 
 class Management {
     Management* ptrMANA;
@@ -20,8 +23,11 @@ class Management {
     char** arrayDWS;
     string menuTab[3] = { "Sign in", "Sign up", "EXIT" };
     int _choose;
-
+   // vector<Data*>& vectorData;
 public:
+    // ///////////////////////////// VECTOR DATA //////////////////////////////////////
+    //auto createVector(vector<Data*>& ex);
+    //auto deleteVector(vector<Data*>& ex);
 
     // ///////////////////////////// CUSTOMER //////////////////////////////////////
     auto abstractArrayOfCustomer(Customer* tab[]) -> void;
@@ -40,12 +46,17 @@ public:
 
 
 
-    ////////////////////////// START ////////////////////////////////////
+    ////////////////////////// START DYNAMIC MENU ////////////////////////////////////
     auto startManagemantWelcomeScreen() -> void;
     auto choosedScreen(const char* txt, size_t rows, size_t columns) -> void;
     auto startDynamicMenu() -> void;
     auto deleteDynamicMEnu() -> void;
 
+    ////////////////////////// LOAD DATA ////////////////////////////////////
+    auto checkLogin() -> bool;
+
+    ////////////////////////// STOP ////////////////////////////////////////
+    auto summaryStop() -> void;
 };
 
 #endif /* Management_hpp */

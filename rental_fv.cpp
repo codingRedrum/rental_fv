@@ -1,41 +1,39 @@
 
 #include <iostream>
-
 #include "Customer.hpp"
 #include "Database.h"
 #include "Vehicle.h"
 #include "Token.h"
 #include "Management.hpp"
+#include "LoadData.h"
 
 using namespace std;
+Data* ptrDATA[2];
+Management* ptrMANAGEMENT;
 Generator gen;
 
-int main() {
 
+int main() {
+    srand(time(NULL));
     Generator::createToken();
     Generator::addToken();
+    ptrDATA[0] = new LoadData;
+    ptrMANAGEMENT = new Management;
+    ptrMANAGEMENT->startDynamicMenu();
 
-
-    srand(time(NULL));
-
-    LoadData lD;
-    Vehicle* tab[2];
-    tab[0] = new Car;
-
-
-    Management rentalManagement;
-    rentalManagement.startManagemantWelcomeScreen();
-    rentalManagement.startDynamicMenu();
+    
     system("CLS");
-    rentalManagement.chooseCustomerClass();
-    rentalManagement.addCustomer();
-    rentalManagement.wecomeClassTypePriorCustomerData();
+    getchar();
+    cout << "siema \n";
+    Sleep(2999);
 
-    tab[0]->checkDB();
-    cout << endl;
-    tab[0]->createVehicleList();
-    tab[0]->loadData();
-    tab[0]->showHiddenDetailsSportCar(0);
+    //Vehicle* tab[2];
+    //tab[0] = new Car;
+    //tab[0]->checkDB();
+    //cout << endl;
+    //tab[0]->createVehicleList();
+    //tab[0]->loadData();
+    //tab[0]->showHiddenDetailsSportCar(0);
     
     
 

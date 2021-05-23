@@ -5,12 +5,18 @@
 #include <stdlib.h>
 #include <string>
 #include <iostream>
-#include "sql/sqlite3.h"  // WINDOWS "sql/sqlite3.h"
+#include "sql/sqlite3.h"  
 #include <fstream>
 #include <sstream>
+#include <iomanip>
+#include <Windows.h>
 #include "Vehicle.h"
 
 using namespace std;
+using std::right;
+using std::left;
+using std::setw;
+using std::fixed;
 
 // zrobic abstracta dziedziczyc load cars, load customers
 class Data {
@@ -20,7 +26,7 @@ public:
     virtual void getNumberOfCustomers() = 0;
     virtual void getData() = 0;
     virtual void checkLogin(string login) = 0;
-    virtual void checkPass(int pw) = 0;
+    virtual bool checingSystem(string) = 0;
 };
 
 class LoadData : public Data {
@@ -32,44 +38,33 @@ class LoadData : public Data {
         string _city;
         string _login;
         int _pass;
+        vector<string> dataBase;
     public:
+        void getNameAndSurname();
         string getLogin() const { return _login; }
         int getPass() const { return _pass; }
         void getData();
     } XXXX;
 
     XXXX** _ptrX;
-    static int _numberOfCustomers;
+    int _numberOfCustomers;
 public:
-    LoadData() {
+    LoadData() { 
         getNumberOfCustomers();
-
+        createData();
+        loadData();
     }
     void createData();
     auto loadData() -> void;
-    void getNumberOfCustomers();
     void getData();
     void checkLogin(string login);
-    void checkPass(int pw);
-    
+    bool checingSystem(string login);
+    void getNumberOfCustomers();
 };
 
 //#endif // LOADDATA_H
 
-
 // uzyc techniki delegowania konstruktorow
-
-
-
-
-
-
-
-
-
-
-
-
 
 //string  loadStrings(string imie, string nazwisko, string login, string password) {
 

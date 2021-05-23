@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Customer.cpp" />
+    <ClCompile Include="DynamicMenu.cpp" />
     <ClCompile Include="DynamicWelcomeScreen.cpp" />
     <ClCompile Include="LoadDatacpp.cpp" />
     <ClCompile Include="Management.cpp" />

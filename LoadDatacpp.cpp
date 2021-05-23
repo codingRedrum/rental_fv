@@ -1,12 +1,10 @@
 #include "LoadData.h"
 
-int LoadData::_numberOfCustomers;
 
 void LoadData::getNumberOfCustomers() {
     string line;
     int i = 0;
-
-    ifstream file("SportCar.txt");
+    ifstream file("CustomerData.txt");
 
     if (file.is_open()) {
         while (!file.eof()) {
@@ -14,6 +12,7 @@ void LoadData::getNumberOfCustomers() {
             i++;
         }
         _numberOfCustomers = i;
+        cout << "Number of customers " << _numberOfCustomers << endl;      
         // file.close();
     }
 }
@@ -26,46 +25,54 @@ void LoadData::createData() {
 }
 
 auto LoadData::loadData() -> void {
-    string _string[10];
     string line, buff;
+    ifstream file;
+    file.open("CustomerData.txt");
+    int tmpValue, i = 0;
 
-    int i = 0;
-    ifstream file("CustomerData.txt");
-
-    if (file.is_open()) {
         while (!file.eof()) {
             getline(file, line);
             stringstream s_string(line);
-
             getline(s_string, buff, ';');
+            _ptrX[i]->dataBase.push_back(buff);
             _ptrX[i]->_name = buff;
             getline(s_string, buff, ';');
+            _ptrX[i]->dataBase.push_back(buff);
             _ptrX[i]->_nazwisko = buff;
             getline(s_string, buff, ';');
+            _ptrX[i]->dataBase.push_back(buff);
             _ptrX[i]->_street = buff;
             getline(s_string, buff, ';');
+            _ptrX[i]->dataBase.push_back(buff);
             _ptrX[i]->_city = buff;
             getline(s_string, buff, ';');
+            _ptrX[i]->dataBase.push_back(buff);
             _ptrX[i]->_login = buff;
             getline(s_string, buff, ';');
             _ptrX[i]->_pass = stoi(buff);
             i++;
         }
         file.close();
-    }
 }
 
 void LoadData::AccessData::getData() {
-    cout << _name << "\t\t " << _nazwisko << "\t\t" << _street << "\t\t" 
-         << _city << "\t\t" << _login << "\t\t" << endl;
+    for (vector<string>::iterator it = dataBase.begin(); it != dataBase.end(); it++) {
+        cout << setw(19) << left << *it << " ";
+    }
+    cout << endl;
 }
 
 void LoadData::getData() {
-    cout << "Name: \t\t Surname:\t\t Street: \t\t City: \t\t Login: " << endl
-         << "------------------------------------------------------------------" << endl;
+    cout << "\nName: \t\t Surname:\t\t Street: \t\t City: \t\t Login: " << endl
+         << "------------------------------------------------------------------------------------------------" << endl;
     for (size_t i = 0; i < _numberOfCustomers; i++) {
         _ptrX[i]->getData();
     }
+    cout << "------------------------------------------------------------------------------------------------" << endl;
+}
+
+void LoadData::AccessData::getNameAndSurname(){
+     cout << _name << " " << _nazwisko << endl; 
 }
 
 void LoadData::checkLogin(string login) {
@@ -76,6 +83,25 @@ void LoadData::checkLogin(string login) {
         tmpLOG = _ptrX[i]->getLogin();
     }
 }
-void LoadData::checkPass(int pw) {
 
+bool LoadData::checingSystem(string login) {
+    for(size_t i = 0; i < _numberOfCustomers; i++)		{
+        if(login == _ptrX[i]->getLogin()) {
+            cout << "Login correct! \n";
+            goto PW;
+        }
+    }
+    return false;
+PW:
+    int tmpPW;
+    cout << "Type password: "; cin >> tmpPW;
+    for(size_t i = 0; i < _numberOfCustomers; i++)		{
+        if(tmpPW == _ptrX[i]->getPass())	{
+            system("CLS");
+            cout << " \n\n\n\t\t\t   Welcome \n\t\t\t";  _ptrX[i]->getNameAndSurname();
+            Sleep(3000);
+            return true;
+        }
+    }
+    return false;
 }
