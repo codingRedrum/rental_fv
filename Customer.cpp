@@ -3,6 +3,7 @@
 extern Generator gen;
 
 void Premium::addCustomer() {
+    system("CLS");
     cout << "\t\t WELCOME TO THE PREMIUM CLASS \n"
     << "To finish reservation process we'll ask you to fill given fields.  \n";
     cout << "Name: "; cin >> this->_imie;
@@ -14,22 +15,26 @@ void Premium::addCustomer() {
 
 
 void Premium::showGivenData() {
-    cout << "\nPremium customer: \n"
-        << "Name: " << this->_imie << "\n"
+    cout << "Name: " << this->_imie << "\n"
         << "Surname: " << this->_nazwisko << "\n"
         << "Street: " << this->_street << "\n"
-        << "City: " << this->_city << "\n"
-        << endl;
+        << "City: " << this->_city << "\n\n";
+    Sleep(1000);
+    cout << "Your random token is: " << gen.getRandomToken(); cout << endl;
+    Sleep(2000);
+    system("CLS");
 }
 
 void Premium::welcomePriorToShowedData() {
     system("CLS");
     cout << "***************** PREMIUM *******************\n"
          << "You have provided following data: \n";
+    Sleep(1000);
 }
 
 
 void VIP::addCustomer() {
+    system("CLS");
     cout << "\t\t WELCOME TO THE VIP CLASS \n"
     << "To finish reservation process we'll ask you to fill given fields.  \n";
     cout << "Name: "; cin >> this->_imie;
@@ -42,11 +47,15 @@ void VIP::addCustomer() {
 
 void VIP::showGivenData() {
     cout << "\nVIP customer: \n"
-         << "Name: " <<  this->_imie << "\n"
-         << "Surname: " << this->_nazwisko << "\n"
-         << "Street: " << this->_street << "\n"
-         << "City: " << this->_city << "\n"
-         << endl;
+        << "Name: " << this->_imie << "\n"
+        << "Surname: " << this->_nazwisko << "\n"
+        << "Street: " << this->_street << "\n"
+        << "City: " << this->_city << "\n\n";
+    Sleep(1000);
+    cout << "Your random token is: " << gen.getRandomToken(); cout << endl;
+    Sleep(2000);
+    Sleep(1000);
+
 }
 
 void VIP::welcomePriorToShowedData() {

@@ -9,25 +9,79 @@
 
 #include "Customer.hpp"
 #include "DynamicWelcomeScreen.h"
-#include "DynamicMenu.h"
 #include "Vehicle.h"
 #include "LoadData.h"
 
 extern Data* ptrDATA[2];
 
 class Management {
+    static Data* ptrLoadDATA;
+    static DynamicWelcomeScreen* ptrDWS;
+    static Generator* ptrGENE;
     Management* ptrMANA;
+    Customer* ptrCUSTOMER[3];
     Customer* ptrCUST;
-    DynamicMenu* ptrDM;
-    DynamicWelcomeScreen* ptrDWS;
+    Vehicle* ptrVEHICLE;
     char** arrayDWS;
-    string menuTab[3] = { "Sign in", "Sign up", "EXIT" };
+    string items[3] = { "Sign in", "Sign up", "EXIT" };
+    int numItems {3};
+    int choose;
     int _choose;
-   // vector<Data*>& vectorData;
+    int customer;
+    size_t choosenCar;
 public:
-    // ///////////////////////////// VECTOR DATA //////////////////////////////////////
-    //auto createVector(vector<Data*>& ex);
-    //auto deleteVector(vector<Data*>& ex);
+    // 1. SET STATIC DATA INTO RUNNING MODE 
+    /////////////////////////////// STATIC DATA //////////////////////////////////////
+    static void createStaticData(){
+        ptrLoadDATA = new LoadData;
+        ptrDWS = new DynamicWelcomeScreen;
+        ptrGENE = new Generator;
+    }
+    static void removeStaticData(){
+        delete ptrLoadDATA;
+        delete ptrDWS;
+        delete ptrGENE;
+    }
+    ///////////////////////  RUN THE WHOLE SYSTEM ///////////////////////////////////////////
+    void runSystem(){
+        ptrDATA[0] = new LoadData;
+        createStaticData();
+        startManagemantWelcomeScreen();
+        ptrLoadDATA->getNumberOfCustomers();
+        ptrLoadDATA->createData();
+        ptrLoadDATA->loadData();
+        choose = startDynamicMenu();
+        whatNext();
+        setCars();
+    }
+ 
+    void whatNext(){
+        switch(choose)	{
+            case 0:
+                checkLogin();
+                break;
+            case 1:
+                chooseCustomerClass();
+                signUp();
+                break;
+            case 2:
+                system("CLS");
+                ptrDWS->backgroundArray();
+                ptrDWS->replaceBackgroundArray("GOOD BYE HOPE TO SEE U AGAIN", 2, 11);
+                ptrDWS->replaceBackgroundArray("2021 Adrian Juszczak All Rights Reserved", 5, 5);
+                ptrDWS->displayArray();
+                Sleep(5000);
+                removeStaticData();
+
+                exit(0);
+            default:
+                cout << "Try once again. \n";
+                break;
+        }
+    }
+
+    void signUp();
+    void setCars();
 
     // ///////////////////////////// CUSTOMER //////////////////////////////////////
     auto abstractArrayOfCustomer(Customer* tab[]) -> void;
@@ -41,21 +95,18 @@ public:
     auto returnCustomerType(Customer* wsk) -> void;
     auto wecomeClassTypePriorCustomerData() ->void;
 
-    ////////////////////// DYNAMIC WELCOME SCREEN /////////////////////////////
-    
-
-
-
-    ////////////////////////// START DYNAMIC MENU ////////////////////////////////////
+    ////////////////////// DYNAMIC WELCOME SCREEN ///////////////////////////////////
     auto startManagemantWelcomeScreen() -> void;
     auto choosedScreen(const char* txt, size_t rows, size_t columns) -> void;
-    auto startDynamicMenu() -> void;
+
+    ////////////////////////// START DYNAMIC MENU ////////////////////////////////////
+    auto startDynamicMenu() -> int;
     auto deleteDynamicMEnu() -> void;
 
-    ////////////////////////// LOAD DATA ////////////////////////////////////
+    ////////////////////////// LOAD DATA ///////////////////////////////////////////
     auto checkLogin() -> bool;
 
-    ////////////////////////// STOP ////////////////////////////////////////
+    ////////////////////////// STOP ///////////////////////////////////////////////
     auto summaryStop() -> void;
 };
 

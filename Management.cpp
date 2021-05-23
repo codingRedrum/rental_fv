@@ -2,16 +2,9 @@
 
 #include "Management.hpp"
 
-
-//auto Management::createVector(vector<Data*>& ex){
-//    ex.push_back(new LoadData);
-//}
-//
-//auto Management::deleteVector(vector<Data*>& ex){
-//    for(size_t i = 0; i < ex.size(); i++)		{
-//        delete ex[i];
-//    }
-//}
+DynamicWelcomeScreen* Management::ptrDWS;
+Generator* Management::ptrGENE;
+Data* Management::ptrLoadDATA;
 
 auto Management::abstractArrayOfCustomer(Customer* tab[]) -> void {
     tab[0] = new Premium;
@@ -24,8 +17,10 @@ A:
     system("CLS");
     cout << endl
         << " Hi, type in according to given information .\n\n"
-        << " 1. I've already rented a car more then 10 times \n"
-        << " 2. I've rented car less than 10 times \n\n"
+        << " 1. I will rent the car for less than 10 days \n\n"
+        << " 2. I will rent the car for more then 10 days \n"
+
+
         << " Choose correct number: ";
 
     cin >> _choose;
@@ -33,17 +28,17 @@ A:
     switch (_choose)
     {
     case 1:
-        ptrCUST = new Premium;
-        ptrMANA = new Management;
-        ptrMANA->choosedScreen("WELCOME TO THE PREMIUM CLASS ", 2, 12);
-        delete ptrMANA;
+        ptrCUSTOMER[0] = new Premium;
+        customer = 0;
+        choosedScreen("WELCOME TO THE PREMIUM CLASS ", 2, 12);
         break;
+
     case 2:
-        ptrCUST = new VIP;
-        ptrMANA = new Management;
-        ptrMANA->choosedScreen("WELCOME TO THE VIP CLASS ", 2, 12);
-        delete ptrMANA;
+        ptrCUSTOMER[1] = new VIP;
+        choosedScreen("WELCOME TO THE VIP CLASS ", 2, 12);
+        customer = 1;
         break;
+
     default:
         system("CLS");
         Sleep(200);
@@ -51,6 +46,33 @@ A:
         Sleep(2000);
         goto A;
     }
+}
+
+void Management::signUp() {
+    switch(customer)	{
+        case 0:
+            ptrCUSTOMER[0]->addCustomer();
+            ptrCUSTOMER[0]->welcomePriorToShowedData();
+            ptrCUSTOMER[0]->showGivenData();
+            break;
+        case 1:
+            ptrCUSTOMER[1]->addCustomer();
+            ptrCUSTOMER[1]->welcomePriorToShowedData();
+            ptrCUSTOMER[1]->showGivenData();
+        default:
+            break;
+    }
+}
+
+void Management::setCars(){
+    ptrVEHICLE = new Car;
+    ptrVEHICLE->checkDB();
+    ptrVEHICLE->createVehicleList();
+    ptrVEHICLE->loadData();
+    ptrVEHICLE->showHiddenDetailsSportCar();
+    ptrVEHICLE->removeVehicle();
+    ptrVEHICLE->showHiddenDetailsSportCar();
+
 }
 
 auto Management::addCustomer() -> void {
@@ -111,14 +133,12 @@ auto Management::wecomeClassTypePriorCustomerData() ->void {
 }
 ////////////////////////// START ////////////////////////////////////
 auto Management::startManagemantWelcomeScreen() -> void {
-    ptrDWS = new DynamicWelcomeScreen;
     system("CLS");
     ptrDWS->backgroundArray();
     ptrDWS->replaceBackgroundArray("WELCOME TO THE CAR RENTAL ", 2, 12);
     ptrDWS->replaceBackgroundArray("2021 Adrian Juszczak All Rights Reserved", 5, 5);
     ptrDWS->displayArray();
     Sleep(3000);
-    delete ptrDWS;
 }
 
 auto Management::choosedScreen(const char* txt, size_t rows, size_t columns) -> void {
@@ -131,22 +151,69 @@ auto Management::choosedScreen(const char* txt, size_t rows, size_t columns) -> 
     Sleep(3000);
     delete ptrDWS;
 }
+////////////////////////// DYNAMIC MENU /////////////////////////////////////
+auto Management::startDynamicMenu() -> int
+{
+    string tmpLogin;
+    int curSel = 0, textAttrib;
+    bool selectionMade = false, needsUpdate = true; // we want to clearscreen first time through
 
+    while(!selectionMade){
+        // only redraw the screen if something has changed, or we're on the first iteration of
+        // our while loop.
+        if(needsUpdate){
+            system("cls");
+            needsUpdate = false;
 
-auto Management::startDynamicMenu() -> void {
-    ptrDM = new DynamicMenu;
-    ptrDM->getUserChoice(menuTab, 3);
-}
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+            cout << "\t\t Main Menu" << endl;
+            cout << "(navigate with arrow keys, select with enter)" << endl << endl;
+            for(int i = 0; i < numItems; i++){
+                if(i == curSel)
+                    textAttrib = 12;
+                else
+                    textAttrib = 11;
 
-auto Management::deleteDynamicMEnu() -> void {
-    delete ptrDM;
+                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), textAttrib);
+
+                if(1)
+                    cout << endl;
+
+                cout << "\t" << "\t" << items[i];
+            }
+        }
+
+        if(GetAsyncKeyState(VK_UP) != 0){
+            curSel--;
+            needsUpdate = true;
+        }
+
+        else if(GetAsyncKeyState(VK_DOWN) != 0){
+            curSel++;
+            needsUpdate = true;
+        }
+
+        else if(GetAsyncKeyState(VK_RETURN) != 0){
+            selectionMade = true;
+        }
+
+        if(curSel < 0){
+            curSel = numItems - 1;
+        }
+        else if(curSel > (numItems - 1))
+            curSel = 0;
+
+        Sleep(100);
+    }
+    return curSel;
 }
 
 ////////////////////////// LOAD DATA ////////////////////////////////////
 
 auto Management::checkLogin() -> bool {
     string tmpLogin;
-    cout << "Login: "; cin >> tmpLogin;
+    system("CLS");
+    cout << "Type your login:"; cin >> tmpLogin;
     if(ptrDATA[0]->checingSystem(tmpLogin))	{
         return true;
     }

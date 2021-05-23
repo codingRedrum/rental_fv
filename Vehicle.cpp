@@ -19,7 +19,6 @@ auto Car::createVehicleList() -> void {
     }
 
     _numberOfCars = _howMany;
-    cout << "You've added a " <<_numberOfCars << " car/s from DB. \n\n";
     
 }
 
@@ -44,7 +43,7 @@ auto Car::removeVehicle() -> void {
     size_t new_size = _howMany - 1;
     int _choose, _pom{1};
     
-    cout << "Which car you would like to sell, choose numer:  "; cin >> _choose;
+    cout << "\n" << "Which car you would like to rent, choose numer:  "; cin >> _choose;
     
     SportCar** tmp = new SportCar*[new_size];
     
@@ -58,7 +57,9 @@ auto Car::removeVehicle() -> void {
     
     delete [] _sportCar;
     _sportCar = tmp;
-
+    _numberOfCars--;
+    cout << "Thank you for your choose! \n";
+    Sleep(1000);
 }
 
 auto Car::describeHiddenSportCar()->void {
@@ -79,21 +80,23 @@ auto Car::setHiddenDetailsSportCar(size_t numb) -> void {
 }
 
 
-auto Car::showHiddenDetailsSportCar(size_t numb) -> void  {
-    cout << "Sport car data: \n";
+auto Car::showHiddenDetailsSportCar() -> void  {
+    system("CLS");
 
-    cout << "Mark \t\t" << "Model \t" << "  Insurance Type: " << "   Horse Power: \t\n";
-    for (size_t i = 0; i < 56; i++) {
+    cout << endl <<  "ID \t" << "Mark \t\t" << "Model \t" << "  Insurance Type: " << "   Horse Power: \t\n";
+    for (size_t i = 0; i < 64; i++) {
         cout << "-";
     }
     cout << endl;
     for (size_t i = 0; i < _numberOfCars; i++) {
+        cout << i+1 << "\t";
         cout << _sportCar[i]->getMark() << "\t\t";
         cout << _sportCar[i]->getModel() << "\t\t";
         cout << _sportCar[i]->getInsuranceDetails() << "\t\t";
         cout << _sportCar[i]->getHorsePower() << "\t";
         cout << endl;
     }
+    Sleep(1000);
 }
 
 auto Car::checkDB() -> void {

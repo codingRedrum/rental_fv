@@ -153,11 +153,9 @@
   <ItemGroup>
     <ClInclude Include="Customer.hpp" />
     <ClInclude Include="Database.h" />
-    <ClInclude Include="DynamicMenu.h" />
     <ClInclude Include="DynamicWelcomeScreen.h" />
     <ClInclude Include="LoadData.h" />
     <ClInclude Include="Management.hpp" />
-    <ClInclude Include="test.hpp" />
     <ClInclude Include="Token.h" />
     <ClInclude Include="Vehicle.h" />
   </ItemGroup>

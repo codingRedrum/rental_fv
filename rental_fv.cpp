@@ -8,23 +8,25 @@
 #include "LoadData.h"
 
 using namespace std;
-Data* ptrDATA[2];
-Management* ptrMANAGEMENT;
-Generator gen;
 
+Data* ptrDATA[2];
+Generator gen;
+int test;
 
 int main() {
     srand(time(NULL));
     Generator::createToken();
     Generator::addToken();
-    ptrDATA[0] = new LoadData;
-    ptrMANAGEMENT = new Management;
-    ptrMANAGEMENT->startDynamicMenu();
-
+   
+    // TEST
+    Management rental_fv;
+    rental_fv.runSystem();
+   
     
+
+    Sleep(2000);
     system("CLS");
     getchar();
-    cout << "siema \n";
     Sleep(2999);
 
     //Vehicle* tab[2];

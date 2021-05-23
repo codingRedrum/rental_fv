@@ -54,12 +54,13 @@ public:
         createData();
         loadData();
     }
+    void getNumberOfCustomers();
     void createData();
     auto loadData() -> void;
     void getData();
     void checkLogin(string login);
     bool checingSystem(string login);
-    void getNumberOfCustomers();
+
 };
 
 //#endif // LOADDATA_H

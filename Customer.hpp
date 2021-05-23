@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include "Token.h"
+#include <Windows.h>
 
 using namespace std;
 
@@ -24,14 +25,7 @@ public:
     }
     virtual void addCustomer() = 0;
     virtual void welcomePriorToShowedData() = 0;
-    virtual void showGivenData() = 0 {
-        cout << "\nPremium customer: \n"
-            << "Name: " << this->_imie << "\n"
-            << "Surname: " << this->_nazwisko << "\n"
-            << "Street: " << this->_street << "\n"
-            << "City: " << this->_city << "\n"
-            << endl;
-    }
+    virtual void showGivenData() = 0;
 };
 
 class NormalCustomer : public Customer {
@@ -192,6 +186,8 @@ public:
     void addCustomer();
     void showGivenData();
     void welcomePriorToShowedData();
+private:
+    float _discount {49.33};
 };
 
 

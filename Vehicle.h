@@ -39,7 +39,7 @@ public:
 	virtual auto showHiddenData() -> void = 0;
     virtual auto describeHiddenSportCar()->void = 0;
     virtual auto setHiddenDetailsSportCar(size_t numb) -> void = 0;
-    virtual auto showHiddenDetailsSportCar(size_t numb) -> void = 0;
+    virtual auto showHiddenDetailsSportCar() -> void = 0;
 	virtual auto loadData()-> void = 0;
 	virtual auto checkDB() -> void = 0;
 	virtual auto showTypeOfCar() -> void = 0;
@@ -66,7 +66,7 @@ public:
 	virtual auto showHiddenData() -> void;
     virtual auto describeHiddenSportCar()->void;
     virtual auto setHiddenDetailsSportCar(size_t numb) -> void;
-    virtual auto showHiddenDetailsSportCar(size_t numb) -> void;
+    virtual auto showHiddenDetailsSportCar() -> void;
 	virtual auto loadData()-> void;
 	virtual auto checkDB() -> void;
 	virtual auto showTypeOfCar() -> void;
