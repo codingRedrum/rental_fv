@@ -21,7 +21,7 @@ void Premium::showGivenData() {
         << "City: " << this->_city << "\n\n";
     Sleep(1000);
     cout << "Your random token is: " << gen.getRandomToken(); cout << endl;
-    Sleep(2000);
+    Sleep(3000);
     system("CLS");
 }
 
@@ -30,6 +30,13 @@ void Premium::welcomePriorToShowedData() {
     cout << "***************** PREMIUM *******************\n"
          << "You have provided following data: \n";
     Sleep(1000);
+}
+
+void Premium::getDataHoritontal() {
+    cout << setw(18) << left << this->_imie 
+         << setw(18) << left << this->_nazwisko 
+         << setw(18) << left << this->_street 
+         << setw(18) << left << this->_city;
 }
 
 
@@ -42,7 +49,6 @@ void VIP::addCustomer() {
     cout << "Street: "; cin >> this->_street;
     cout << "City: "; cin >> this->_city;
     this->_password = gen.getRandomToken();
-    // dodatkowe info priv
 }
 
 void VIP::showGivenData() {
@@ -53,13 +59,18 @@ void VIP::showGivenData() {
         << "City: " << this->_city << "\n\n";
     Sleep(1000);
     cout << "Your random token is: " << gen.getRandomToken(); cout << endl;
-    Sleep(2000);
+    Sleep(3000);
     Sleep(1000);
-
 }
 
 void VIP::welcomePriorToShowedData() {
     system("CLS");
     cout << "***************** VIP *******************\n"
          << "You have provided following data: \n";
+}
+void VIP::getDataHoritontal() {
+    cout << setw(18) << left << this->_imie
+         << setw(18) << left << this->_nazwisko
+         << setw(18) << left << this->_street
+         << setw(18) << left << this->_city;
 }

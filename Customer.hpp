@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <vector>
 #include "Token.h"
@@ -20,18 +21,16 @@ protected:
     int _password;
 
 public:
-    Customer() {
-
-    }
+    Customer() {}
     virtual void addCustomer() = 0;
     virtual void welcomePriorToShowedData() = 0;
     virtual void showGivenData() = 0;
+    virtual void getDataHoritontal() = 0;
 };
 
 class NormalCustomer : public Customer {
 public:
     NormalCustomer() {
-        
         this->_imie = "def";
         this->_nazwisko = "def";
         this->_login = "def"; 
@@ -54,7 +53,6 @@ public:
         this->_city = mv._city;
         this->_street =mv._street;
     };
-    NormalCustomer(const string& fname, const string& secname, const string& login, const int& pass);
 
     NormalCustomer& operator=(const NormalCustomer& cp) {
         if (this != &cp) {
@@ -80,16 +78,14 @@ public:
      void addCustomer();
      void showGivenData();
      void welcomePriorToShowedData();
-
+     void getDataHoritontal();
 private:
     float _discount{ 24.33 };
-
 };
 
 class Premium : public Customer {
 public:
     Premium() {
-
         this->_imie = "def";
         this->_nazwisko = "def";
         this->_login = "def";
@@ -112,7 +108,6 @@ public:
         this->_city = mv._city;
         this->_street = mv._street;
     };
-    Premium(const string& fname, const string& secname, const string& login, const int& pass);
 
     Premium& operator=(const Premium& cp) {
         if (this != &cp) {
@@ -138,16 +133,14 @@ public:
     void addCustomer();
     void showGivenData();
     void welcomePriorToShowedData();
-
+    void getDataHoritontal();
 private:
     float _discount{ 29.33 };
-
 };
 
 class VIP : public Customer {
 public:
     VIP() {
-
         this->_imie = "def";
         this->_nazwisko = "def";
         this->_login = "def";
@@ -164,7 +157,6 @@ public:
         this->_nazwisko = mv._nazwisko;
         this->_login = mv._login;
     };
-    VIP(const string& fname, const string& secname, const string& login, const int& pass);
 
     VIP& operator=(const VIP& cp) {
         if (this != &cp) {
@@ -174,7 +166,7 @@ public:
             _password = cp._password;
         }
     }
-    VIP&& operator=(const VIP&& mv) {
+    VIP&& operator=(const VIP&& mv)  {
         if (this != &mv) {
             _imie = mv._imie;
             _nazwisko = mv._nazwisko;
@@ -182,14 +174,13 @@ public:
             _password = mv._password;
         }
     }
-
     void addCustomer();
     void showGivenData();
     void welcomePriorToShowedData();
+    void getDataHoritontal();
 private:
     float _discount {49.33};
 };
-
 
 #endif /* Customer_hpp */
 

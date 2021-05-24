@@ -29,27 +29,9 @@ class Generator {
     void setNewToken();
 
 public:
-    Generator() {
-        _ptrToken = new Token**[_row];
-        for (size_t i = 0; i < _row; i++) {
-            _ptrToken[i] = new Token*[_column];
-        }
-        for (size_t i = 0; i < _row; i++) {
-            for (size_t j = 0; j < _column; j++) {
-                _ptrToken[i][j] = new Token;
-            }
-        }
-        setNewToken();
-    }
+    Generator();
+    ~Generator();
 
-    ~Generator() {
-        for (size_t i = 0; i < _row; i++) {
-            for (size_t j = 0; j < _column; j++)
-                delete[] _ptrToken[i][j];
-            delete[] _ptrToken[i];
-        }
-        delete[] _ptrToken;
-    }
     int getRandomToken();
     static void createToken() { _token = new Token; }
     static void addToken() { _token->setToken(); }

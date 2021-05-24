@@ -1,6 +1,5 @@
 #include "LoadData.h"
 
-
 void LoadData::getNumberOfCustomers() {
     string line;
     int i = 0;
@@ -16,6 +15,7 @@ void LoadData::getNumberOfCustomers() {
         // file.close();
     }
 }
+
 void LoadData::createData() {
     XXXX** tmp = new XXXX*[_numberOfCustomers];
     for (size_t i = 0; i < _numberOfCustomers; i++) {

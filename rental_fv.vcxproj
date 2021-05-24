@@ -154,6 +154,7 @@
     <ClInclude Include="Customer.hpp" />
     <ClInclude Include="Database.h" />
     <ClInclude Include="DynamicWelcomeScreen.h" />
+    <ClInclude Include="RentalHistory.h" />
     <ClInclude Include="LoadData.h" />
     <ClInclude Include="Management.hpp" />
     <ClInclude Include="Token.h" />

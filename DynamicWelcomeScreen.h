@@ -25,9 +25,8 @@ public:
     
     ~DynamicWelcomeScreen() {
         //Free each sub-array
-        for (size_t i = 0; i < rows; i++) {
-            delete[] newArray[i];
-        }
+        for (size_t i = 0; i < rows; i++) 
+                delete[] newArray[columns];
         //Free the array of pointer
         delete[] newArray;
     }

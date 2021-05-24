@@ -6,15 +6,20 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <limits>
 
 #include "Customer.hpp"
 #include "DynamicWelcomeScreen.h"
 #include "Vehicle.h"
 #include "LoadData.h"
+#include "RentalHistory.h"
 
 extern Data* ptrDATA[2];
 
 class Management {
+    GenericClass<string> test;
+    GenericClass<RentalStart> startRent;
+    GenericClass<RentalStop> stopRent;
     static Data* ptrLoadDATA;
     static DynamicWelcomeScreen* ptrDWS;
     static Generator* ptrGENE;
@@ -23,76 +28,56 @@ class Management {
     Customer* ptrCUST;
     Vehicle* ptrVEHICLE;
     char** arrayDWS;
-    string items[3] = { "Sign in", "Sign up", "EXIT" };
-    int numItems {3};
-    int choose;
-    int _choose;
-    int customer;
+    string items[3] = {"Sign in", "Sign up", "EXIT"};
+    int numItems {3}, choose, _choose, customer, genericNrOfData;
     size_t choosenCar;
+    vector<Customer*> klient;
 public:
+    Management() {
+        runSystem();
+    }
+    ~Management() {
+        removeStaticData();
+    }
     // 1. SET STATIC DATA INTO RUNNING MODE 
     /////////////////////////////// STATIC DATA //////////////////////////////////////
-    static void createStaticData(){
+    static void createStaticData() {
         ptrLoadDATA = new LoadData;
         ptrDWS = new DynamicWelcomeScreen;
         ptrGENE = new Generator;
     }
-    static void removeStaticData(){
+    static void removeStaticData() {
         delete ptrLoadDATA;
         delete ptrDWS;
         delete ptrGENE;
     }
     ///////////////////////  RUN THE WHOLE SYSTEM ///////////////////////////////////////////
-    void runSystem(){
-        ptrDATA[0] = new LoadData;
-        createStaticData();
-        startManagemantWelcomeScreen();
-        ptrLoadDATA->getNumberOfCustomers();
-        ptrLoadDATA->createData();
-        ptrLoadDATA->loadData();
-        choose = startDynamicMenu();
-        whatNext();
-        setCars();
-    }
- 
-    void whatNext(){
-        switch(choose)	{
-            case 0:
-                checkLogin();
-                break;
-            case 1:
-                chooseCustomerClass();
-                signUp();
-                break;
-            case 2:
-                system("CLS");
-                ptrDWS->backgroundArray();
-                ptrDWS->replaceBackgroundArray("GOOD BYE HOPE TO SEE U AGAIN", 2, 11);
-                ptrDWS->replaceBackgroundArray("2021 Adrian Juszczak All Rights Reserved", 5, 5);
-                ptrDWS->displayArray();
-                Sleep(5000);
-                removeStaticData();
-
-                exit(0);
-            default:
-                cout << "Try once again. \n";
-                break;
-        }
-    }
-
+    void runSystem();
+    void whatNext();
     void signUp();
     void setCars();
+    void periodOfRental();
+    void setDataToGenericClass(string start, string stop);
+    void summarizeRent();
+    void goodBye();
+
+    //////////////////////////////// VECTOR ///////////////////////////////////////
+    void createContainer(int wybor) {
+        switch(wybor) 	{
+            case 0:
+                klient.push_back(new Premium);
+                break;
+            case 1:
+                klient.push_back(new VIP);
+                break;
+            default:
+                break;
+        }   
+    }
 
     // ///////////////////////////// CUSTOMER //////////////////////////////////////
-    auto abstractArrayOfCustomer(Customer* tab[]) -> void;
     auto chooseCustomerClass() -> void;
-    auto addCustomer() -> void; 
-    auto abstractPremiumCustomer(Customer *tab[], size_t size) -> void; 
-    auto vipCustomer(Customer* tab[], size_t size) -> void; 
-    auto deleteVipCustomer(Customer* tab[], size_t size) -> void;
-    auto deletePremiumCustomer(Customer* tab[], size_t size) -> void;
-    auto create(Customer* tab[]) -> void;  
-    auto returnCustomerType(Customer* wsk) -> void;
+    auto addCustomer() -> void;
     auto wecomeClassTypePriorCustomerData() ->void;
 
     ////////////////////// DYNAMIC WELCOME SCREEN ///////////////////////////////////
@@ -106,8 +91,6 @@ public:
     ////////////////////////// LOAD DATA ///////////////////////////////////////////
     auto checkLogin() -> bool;
 
-    ////////////////////////// STOP ///////////////////////////////////////////////
-    auto summaryStop() -> void;
 };
 
 #endif /* Management_hpp */

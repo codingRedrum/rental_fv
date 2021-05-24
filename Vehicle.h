@@ -29,7 +29,6 @@ struct Comfort : public ToV {
 	}
 };
 
-
 class Vehicle {
 public:
 	virtual auto createVehicleList() -> void = 0;
@@ -94,9 +93,9 @@ private:
 		auto getModel() -> const string { return _model; }
 		auto getHorsePower() -> const float { return _horsePower; }
 		auto getInsuranceDetails() -> const string { return _insuranceType; }
-		auto setHiddenDetailsSportCar(string mark, string model, string insurance, float horsePower) -> void;
-		auto setHiddenDetailsSportCar(SportCar** ptrSportCar, vector<string> &hiddenString, vector<float> hiddenFloat, size_t number) -> void;
-        auto describeHiddenSportCar() -> void;
+		//auto setHiddenDetailsSportCar(string mark, string model, string insurance, float horsePower) -> void;
+		//auto setHiddenDetailsSportCar(SportCar** ptrSportCar, vector<string> &hiddenString, vector<float> hiddenFloat, size_t number) -> void;
+		//auto describeHiddenSportCar() -> void;
 		auto setMark(string mark) -> void;
 		auto setModel(string model) -> void;
 		auto setInsurance(string insurance) -> void;

@@ -10,22 +10,18 @@ using namespace std;
 array<string, 3> _hiddenDataArray;
 array<float, 3> _hiddenFloatArray;
 
-
 auto Car::createVehicleList() -> void {
     _sportCar = new SportCar*[_howMany];
     
     for (int i = 0; i < _howMany; i++) {
         _sportCar[i] = new SportCar;
     }
-
     _numberOfCars = _howMany;
-    
 }
 
 auto Car::addVehicle() -> void  {
     size_t new_size = _howMany + 1;
-    SportCar** _tmp = new SportCar*[new_size];
-    
+    SportCar** _tmp = new SportCar*[new_size];   
     // rewrite the value of pointer
     for (int i = 0; i < new_size-1; i++) {
         _tmp[i] = _sportCar[i];
@@ -36,7 +32,6 @@ auto Car::addVehicle() -> void  {
     _sportCar = _tmp;
     _howMany++;
     _numberOfCars++;
-    
 }
 
 auto Car::removeVehicle() -> void {
@@ -79,7 +74,6 @@ auto Car::setHiddenDetailsSportCar(size_t numb) -> void {
         _sportCar[numb]->_horsePower = _hiddenFloatArray[0];
 }
 
-
 auto Car::showHiddenDetailsSportCar() -> void  {
     system("CLS");
 
@@ -102,7 +96,6 @@ auto Car::showHiddenDetailsSportCar() -> void  {
 auto Car::checkDB() -> void {
     string line;
     int i = 0;
-
     ifstream file("SportCar.txt");
 
     if (file.is_open()) {
@@ -159,8 +152,6 @@ auto Car::showTypeOfCar() -> void {
      this->_horsePower = hp;
 }
 
-
-
 auto Car::showVehicle() -> void {
 
 }
@@ -168,7 +159,6 @@ auto Car::showVehicle() -> void {
 auto Car::showHiddenData() -> void {
     
 }
-
 
 Car::SportCar::SportCar() {
     

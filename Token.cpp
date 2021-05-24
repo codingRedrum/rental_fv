@@ -2,6 +2,28 @@
 
 Token* Generator::_token;
 
+Generator::Generator() {
+    _ptrToken = new Token * *[_row];
+    for(size_t i = 0; i < _row; i++) {
+        _ptrToken[i] = new Token * [_column];
+    }
+    for(size_t i = 0; i < _row; i++) {
+        for(size_t j = 0; j < _column; j++) {
+            _ptrToken[i][j] = new Token;
+        }
+    }
+    setNewToken();
+}
+
+Generator::~Generator() {
+    for(size_t i = 0; i < _row; i++) {
+        for(size_t j = 0; j < _column; j++)
+            delete[] _ptrToken[i][j];
+        delete[] _ptrToken[i];
+    }
+    delete[] _ptrToken;
+}
+
 void Generator::setNewToken() {
 
     for (size_t i = 0; i < 5; i++) {

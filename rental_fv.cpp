@@ -8,7 +8,6 @@
 #include "LoadData.h"
 
 using namespace std;
-
 Data* ptrDATA[2];
 Generator gen;
 int test;
@@ -17,25 +16,16 @@ int main() {
     srand(time(NULL));
     Generator::createToken();
     Generator::addToken();
-   
-    // TEST
-    Management rental_fv;
-    rental_fv.runSystem();
-   
     
+    Management rental_fv;
 
-    Sleep(2000);
-    system("CLS");
-    getchar();
-    Sleep(2999);
+    cout << "\n\n\t\t  THE END :) \n";
+    Sleep(5000);
+    
+    
+   
 
-    //Vehicle* tab[2];
-    //tab[0] = new Car;
-    //tab[0]->checkDB();
-    //cout << endl;
-    //tab[0]->createVehicleList();
-    //tab[0]->loadData();
-    //tab[0]->showHiddenDetailsSportCar(0);
+ 
     
     
 

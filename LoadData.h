@@ -13,12 +13,6 @@
 #include "Vehicle.h"
 
 using namespace std;
-using std::right;
-using std::left;
-using std::setw;
-using std::fixed;
-
-// zrobic abstracta dziedziczyc load cars, load customers
 class Data {
 public:
     virtual void createData() = 0;
@@ -63,13 +57,3 @@ public:
 
 };
 
-//#endif // LOADDATA_H
-
-// uzyc techniki delegowania konstruktorow
-
-//string  loadStrings(string imie, string nazwisko, string login, string password) {
-
-////    string createdSQL = "'" + imie +  "', '" += nazwisko + "', '" + login + "', '" + password + "'";
-
-////    return createdSQL;
-//}
