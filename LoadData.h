@@ -1,3 +1,10 @@
+/*
+Dissemination of this information or reproduction of this material is strictly forbidden unless prior written permission is obtained
+from Adrian Juszczak. Access to the source code contained herein is hereby forbidden.
+
+© All Rights Reserved Created by Adrian Juszczak.
+*/
+
 #pragma once
 //#ifndef LOADDATA_H
 //#define LOADDATA_H
@@ -11,8 +18,13 @@
 #include <iomanip>
 #include <Windows.h>
 #include "Vehicle.h"
+#include "RentalHistory.h"
 
 using namespace std;
+extern GenericClass<string> test;
+extern GenericClass<RentalStart> startRent;
+extern GenericClass<RentalStop> stopRent;
+extern int genericNrOfData;
 class Data {
 public:
     virtual void createData() = 0;
@@ -21,6 +33,7 @@ public:
     virtual void getData() = 0;
     virtual void checkLogin(string login) = 0;
     virtual bool checingSystem(string) = 0;
+    virtual void getPointerXXXX(int nmb) = 0;
 };
 
 class LoadData : public Data {
@@ -34,6 +47,7 @@ class LoadData : public Data {
         int _pass;
         vector<string> dataBase;
     public:
+        void summarizeLoadData();
         void getNameAndSurname();
         string getLogin() const { return _login; }
         int getPass() const { return _pass; }
@@ -52,8 +66,9 @@ public:
     void createData();
     auto loadData() -> void;
     void getData();
+    void getPointerXXXX(int nmb);
     void checkLogin(string login);
     bool checingSystem(string login);
-
+    static int _numberOnList;
 };
 

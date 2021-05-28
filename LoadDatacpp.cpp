@@ -1,5 +1,54 @@
+/*
+Dissemination of this information or reproduction of this material is strictly forbidden unless prior written permission is obtained
+from Adrian Juszczak. Access to the source code contained herein is hereby forbidden.
+
+© All Rights Reserved Created by Adrian Juszczak.
+*/
+
 #include "LoadData.h"
 
+int LoadData::_numberOnList;
+
+void LoadData::AccessData::summarizeLoadData() {
+    ofstream myfile;
+    myfile.open("savedData.txt", std::ios_base::app);
+    system("CLS");
+    cout << "\n************************************ SHORT SUMMARIZING OF YOUR RENT ******************************** \n\n";
+    cout << setw(18) << left << "Name: "
+        << setw(18) << left << "Surname: "
+        << setw(18) << left << "Street: "
+        << setw(18) << left << "City: "
+        << setw(18) << left << "Rent from: "
+        << "Rent to: \n";
+    cout << "----------------------------------------------------------------------------------------------------- \n";
+    cout << setw(18) << left << this->_name
+        << setw(18) << left << this->_nazwisko
+        << setw(18) << left << this->_street
+        << setw(18) << left << this->_city;
+
+    myfile << "DB"; myfile << ";";
+    myfile << this->_name; myfile << ";";
+    myfile << this->_nazwisko; myfile << ";";
+    myfile << this->_street; myfile << ";";
+    myfile << this->_city; myfile << ";";
+    myfile << this->_login; myfile << ";";
+    myfile << this->_pass;
+
+    for(size_t i = 0; i < genericNrOfData; i++) {
+        cout << setw(18) << left << startRent[i].returnDate() << stopRent[i].returnDate();
+        if(myfile.is_open()) {
+            myfile << startRent[i].returnDate(); myfile << ";";
+            myfile << stopRent[i].returnDate(); myfile << ";";
+            myfile << "\n";
+        }
+    }
+    myfile.close();
+    Sleep(5000);
+}
+
+void LoadData::getPointerXXXX(int nmb) {
+    this->_ptrX[nmb]->summarizeLoadData();
+}
 void LoadData::getNumberOfCustomers() {
     string line;
     int i = 0;
@@ -88,6 +137,7 @@ bool LoadData::checingSystem(string login) {
     for(size_t i = 0; i < _numberOfCustomers; i++)		{
         if(login == _ptrX[i]->getLogin()) {
             cout << "Login correct! \n";
+            _numberOnList = i;
             goto PW;
         }
     }

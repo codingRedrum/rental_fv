@@ -1,3 +1,10 @@
+/***********************************************************************************************************************************
+** Dissemination of this information or reproduction of this material is strictly forbidden unless prior written permission is obtained
+** from Adrian Juszczak. Access to the source code contained herein is hereby forbidden.
+
+**              © All Rights Reserved Created by Adrian Juszczak.
+*/
+
 #ifndef DYNAMICWELCOMESCREEN_H
 #define DYNAMICWELCOMESCREEN_H
 
@@ -12,8 +19,8 @@ using namespace std;
 class DynamicWelcomeScreen {
     char** newArray;
     const char* tmpString;
-    size_t rows = 8;
-    size_t columns = 50;
+    size_t rows = 20;
+    size_t columns = 100;
 
 public:
     DynamicWelcomeScreen() {
@@ -24,11 +31,11 @@ public:
     }
     
     ~DynamicWelcomeScreen() {
-        //Free each sub-array
-        for (size_t i = 0; i < rows; i++) 
-                delete[] newArray[columns];
-        //Free the array of pointer
-        delete[] newArray;
+        ////Free each sub-array
+        //for (size_t i = 0; i < rows; i++) 
+        //        delete[] newArray[columns];
+        ////Free the array of pointer
+        //delete[] newArray;
     }
 
     auto returnArray() -> char**;

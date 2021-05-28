@@ -1,8 +1,16 @@
+/*
+Dissemination of this information or reproduction of this material is strictly forbidden unless prior written permission is obtained
+from Adrian Juszczak. Access to the source code contained herein is hereby forbidden.
+
+© All Rights Reserved Created by Adrian Juszczak.
+*/
+
 #ifndef Management_hpp
 #define Management_hpp
 
 #include <stdio.h>
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -15,23 +23,24 @@
 #include "RentalHistory.h"
 
 extern Data* ptrDATA[2];
-
+extern GenericClass<string> test;
+extern GenericClass<RentalStart> startRent;
+extern GenericClass<RentalStop> stopRent;
+extern int genericNrOfData;
 class Management {
-    GenericClass<string> test;
-    GenericClass<RentalStart> startRent;
-    GenericClass<RentalStop> stopRent;
-    static Data* ptrLoadDATA;
-    static DynamicWelcomeScreen* ptrDWS;
-    static Generator* ptrGENE;
+
     Management* ptrMANA;
     Customer* ptrCUSTOMER[3];
     Customer* ptrCUST;
     Vehicle* ptrVEHICLE;
-    char** arrayDWS;
-    string items[3] = {"Sign in", "Sign up", "EXIT"};
-    int numItems {3}, choose, _choose, customer, genericNrOfData;
     size_t choosenCar;
     vector<Customer*> klient;
+    string items[3] = {"Sign in", "Sign up", "EXIT"};
+    static Data* ptrLoadDATA;
+    static DynamicWelcomeScreen* ptrDWS;
+    static Generator* ptrGENE;
+    char** arrayDWS;
+    int numItems {3}, choose, _choose, customer;
 public:
     Management() {
         runSystem();
@@ -89,7 +98,7 @@ public:
     auto deleteDynamicMEnu() -> void;
 
     ////////////////////////// LOAD DATA ///////////////////////////////////////////
-    auto checkLogin() -> bool;
+    auto checkLogin() -> void;
 
 };
 

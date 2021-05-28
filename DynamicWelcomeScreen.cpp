@@ -1,3 +1,10 @@
+/*
+Dissemination of this information or reproduction of this material is strictly forbidden unless prior written permission is obtained
+from Adrian Juszczak. Access to the source code contained herein is hereby forbidden.
+
+© All Rights Reserved Created by Adrian Juszczak.
+*/
+
 #include "DynamicWelcomeScreen.h"
 #include <string>
 #include <Windows.h>
@@ -8,11 +15,11 @@ auto DynamicWelcomeScreen::backgroundArray() -> char ** {
         for (size_t j = 0; j < columns; j++) {
             if (i == 0 && j == j) {
                 newArray[i][j] = '=';
-            } else if (i == 7 && j == j) {
+            } else if (i == 19 && j == j) {
                 newArray[i][j] = '=';
-            } else if ((i > 0 && i < 7) && j == 0) {
+            } else if ((i > 0 && i < 19) && j == 0) {
                 newArray[i][j] = '|';
-            } else if ((i > 0 && i < 7) && j == 49) {
+            } else if ((i > 0 && i < 19) && j == 99) {
                 newArray[i][j] = '|';
             } else {
                 newArray[i][j] = ' ';
@@ -35,18 +42,13 @@ auto DynamicWelcomeScreen::displayArray() -> void  {
     for (size_t i = 0; i < rows; i++) {
         for (size_t j = 0; j < columns; j++) {
             if (i == 2) {
-                //Sleep(50); use it for windows
-                Sleep(10);
+                Sleep(0);
             } else if (i == 5) {
-                //Sleep(50); use it for windows
-                Sleep(10);
+                Sleep(0);
             } else {
-                //Sleep(50); use it for windows
-                Sleep(1);
+                Sleep(0);
             }
             cout << newArray[i][j];
-            //Sleep(50); use it for windows
-           // Sleep(1);
         }
         cout << endl;
     }

@@ -1,10 +1,12 @@
-#ifndef Customer_hpp
-#define Customer_hpp
+/***********************************************************************************************************************************
+** Dissemination of this information or reproduction of this material is strictly forbidden unless prior written permission is obtained
+** from Adrian Juszczak. Access to the source code contained herein is hereby forbidden.
 
-#include <stdio.h>
-#include <iostream>
+**              © All Rights Reserved Created by Adrian Juszczak.
+*/
+
+#define Customer_hpp
 #include <iomanip>
-#include <string>
 #include <vector>
 #include "Token.h"
 #include <Windows.h>
@@ -12,6 +14,7 @@
 using namespace std;
 
 class Customer {
+    
 protected:
     string _imie;
     string _nazwisko;

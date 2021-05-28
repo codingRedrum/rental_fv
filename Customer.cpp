@@ -1,3 +1,10 @@
+/***********************************************************************************************************************************
+** Dissemination of this information or reproduction of this material is strictly forbidden unless prior written permission is obtained
+** from Adrian Juszczak. Access to the source code contained herein is hereby forbidden.
+
+**              © All Rights Reserved Created by Adrian Juszczak.
+*/
+
 #include "Customer.hpp"
 
 extern Generator gen;
@@ -20,9 +27,24 @@ void Premium::showGivenData() {
         << "Street: " << this->_street << "\n"
         << "City: " << this->_city << "\n\n";
     Sleep(1000);
-    cout << "Your random token is: " << gen.getRandomToken(); cout << endl;
+    int rndToken = gen.getRandomToken();
+    cout << "Your random token is: " << rndToken << endl;
     Sleep(3000);
     system("CLS");
+
+    ofstream myfile;
+    myfile.open("savedData.txt", std::ios_base::app);
+
+    if(myfile.is_open()) {
+        myfile << "PREMIUM"; myfile << ";";
+        myfile << this->_imie; myfile << ";";
+        myfile << this->_nazwisko; myfile << ";";
+        myfile << this->_street; myfile << ";";
+        myfile << this->_city; myfile << ";";
+        myfile << this->_imie + this->_nazwisko; myfile << ";";
+        myfile << rndToken;
+        myfile.close();
+    }
 }
 
 void Premium::welcomePriorToShowedData() {
@@ -58,9 +80,25 @@ void VIP::showGivenData() {
         << "Street: " << this->_street << "\n"
         << "City: " << this->_city << "\n\n";
     Sleep(1000);
-    cout << "Your random token is: " << gen.getRandomToken(); cout << endl;
+    int rndToken = gen.getRandomToken();
+    cout << "Your random token is: " << rndToken << endl;
     Sleep(3000);
-    Sleep(1000);
+    system("CLS");
+
+    ofstream myfile;
+    myfile.open("savedData.txt", std::ios_base::app);
+
+    if(myfile.is_open()) {
+        myfile << "\n";
+        myfile << "VIP"; myfile << ";";
+        myfile << this->_imie; myfile << ";";
+        myfile << this->_nazwisko; myfile << ";";
+        myfile << this->_street; myfile << ";";
+        myfile << this->_city; myfile << ";";
+        myfile << this->_imie + this->_nazwisko; myfile << ";";
+        myfile << rndToken;
+        myfile.close();
+    }
 }
 
 void VIP::welcomePriorToShowedData() {

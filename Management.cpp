@@ -1,4 +1,9 @@
-//  Created by Adrian Juszczak on 03/05/2021.
+/*
+Dissemination of this information or reproduction of this material is strictly forbidden unless prior written permission is obtained
+from Adrian Juszczak. Access to the source code contained herein is hereby forbidden.
+
+© All Rights Reserved Created by Adrian Juszczak.
+*/
 
 #include "Management.hpp"
 
@@ -31,24 +36,26 @@ auto Management::chooseCustomerClass() -> void {
 A:
     int _choose;
     system("CLS");
-    cout << endl
-         << " Hi, type in according to given information .\n\n"
-         << " 1. I will rent the car for less than 10 days \n"
-         << " 2. I will rent the car for more then 10 days \n\n";
-    cout << " Choose correct number: "; cin >> _choose;
+    cout << endl;
+    ptrDWS->replaceBackgroundArray("Hi, type in according to given information .", 2, 30);
+    ptrDWS->replaceBackgroundArray("1. I will rent the car for less than 10 days .", 5, 30);
+    ptrDWS->replaceBackgroundArray("2. I will rent the car for more then 10 days", 6, 30);
+    ptrDWS->replaceBackgroundArray("Choose correct number: ", 12, 30);
+    ptrDWS->displayArray();
+    cin >> _choose;
 
     switch(_choose)     {
         case 1:
             ptrCUSTOMER[0] = new Premium;
             createContainer(_choose);
             customer = 0;
-            choosedScreen("WELCOME TO THE PREMIUM CLASS ", 2, 12);
+            choosedScreen("WELCOME TO THE PREMIUM CLASS ", 2, 35);
             break;
 
         case 2:
             ptrCUSTOMER[1] = new VIP;
             createContainer(_choose);
-            choosedScreen("WELCOME TO THE VIP CLASS ", 2, 12);
+            choosedScreen("WELCOME TO THE VIP CLASS ", 2, 35);
             customer = 1;
             break;
 
@@ -88,6 +95,8 @@ void Management::setCars() {
 }
 
 void Management::summarizeRent() {
+    ofstream myfile;
+    myfile.open("savedData.txt", std::ios_base::app);
     system("CLS");
     cout << "\n************************************ SHORT SUMMARIZING OF YOUR RENT ******************************** \n\n";
     cout << setw(18) << left << "Name: "
@@ -101,12 +110,20 @@ void Management::summarizeRent() {
     ptrCUSTOMER[customer]->getDataHoritontal();
     for(size_t i = 0; i < genericNrOfData; i++) 		{
         cout << setw(18) << left << startRent[i].returnDate()  << stopRent[i].returnDate();
+        if(myfile.is_open()) {
+            myfile << startRent[i].returnDate(); myfile << ";";
+            myfile << stopRent[i].returnDate(); myfile << ";";
+            myfile << "\n";
+            myfile.close();
+        }
     }
     Sleep(5000);
+
 }
 
 void Management::goodBye() {
-    choosedScreen("GOOD BYE HOPE TO SEE U AGAIN ", 2, 11);
+    choosedScreen("GOOD BYE HOPE TO SEE U AGAIN ", 2, 38);
+    delete[] ptrDATA;
 }
 
 void Management::setDataToGenericClass(string start, string stop) {
@@ -152,8 +169,8 @@ auto Management::wecomeClassTypePriorCustomerData() ->void {
 auto Management::startManagemantWelcomeScreen() -> void {
     system("CLS");
     ptrDWS->backgroundArray();
-    ptrDWS->replaceBackgroundArray("WELCOME TO THE CAR RENTAL ", 2, 12);
-    ptrDWS->replaceBackgroundArray("2021 Adrian Juszczak All Rights Reserved", 5, 5);
+    ptrDWS->replaceBackgroundArray("WELCOME TO THE CAR RENTAL ", 2, 38);
+    ptrDWS->replaceBackgroundArray("2021 Adrian Juszczak All Rights Reserved", 18, 30);
     ptrDWS->displayArray();
     Sleep(3000);
 }
@@ -163,7 +180,7 @@ auto Management::choosedScreen(const char* txt, size_t rows, size_t columns) -> 
     system("CLS");
     ptrDWS->backgroundArray();
     ptrDWS->replaceBackgroundArray(txt, rows, columns);
-    ptrDWS->replaceBackgroundArray("2021 Adrian Juszczak All Rights Reserved", 5, 5);
+    ptrDWS->replaceBackgroundArray("2021 Adrian Juszczak All Rights Reserved", 18, 30);
     ptrDWS->displayArray();
     Sleep(3000);
     
@@ -173,15 +190,15 @@ auto Management::startDynamicMenu() -> int {
     string tmpLogin;
     int curSel = 0, textAttrib;
     bool selectionMade = false, needsUpdate = true; 
-
     while(!selectionMade) {
         if(needsUpdate) {
             system("cls");
             needsUpdate = false;
 
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-            cout << "\t\t Main Menu" << endl;
-            cout << "(navigate with arrow keys, select with enter)" << endl << endl;
+            cout << endl << endl << endl;
+            cout << setw(20) << left << "\t\t\t\t Main Menu" << endl;
+            cout << setw(20) << left << "\t\t(navigate with arrow keys, select with enter)" << endl << endl;
             for(int i = 0; i < numItems; i++) {
                 if(i == curSel)
                     textAttrib = 12;
@@ -193,7 +210,7 @@ auto Management::startDynamicMenu() -> int {
                 if(1)
                     cout << endl;
 
-                cout << "\t" << "\t" << items[i];
+                cout << setw(20) << left  << "\t" << "\t" << items[i];
             }
         }
 
@@ -223,16 +240,26 @@ auto Management::startDynamicMenu() -> int {
 }
 
 ////////////////////////// LOAD DATA ////////////////////////////////////
-auto Management::checkLogin() -> bool {
+auto Management::checkLogin() -> void {
     string tmpLogin;
+    string txt[3] {"Something wen't wrong. \n", "Apparently you aren't our customer. Try once again. \n", "You will be forwarded to main menu where you can Sign Up! \n"};
     system("CLS");
-    cout << "Type your login:"; cin >> tmpLogin;
-    if(ptrDATA[0]->checingSystem(tmpLogin)) {
-        return true;
-    }
-    else {
-        cout << "Apparently you aren't our customer. You can sign up. \n";
-        return false;
+    for(size_t i = 0; i < 3; i++) {
+        cout << "Type your login:"; cin >> tmpLogin;
+        if(ptrDATA[0]->checingSystem(tmpLogin)) {
+            setCars();
+            periodOfRental();
+            ptrDATA[0]->getPointerXXXX(LoadData::_numberOnList);
+            goodBye();
+            Sleep(5000);
+            exit(0);
+        }
+        else {
+            system("CLS");
+            cout << txt[i];
+            Sleep(3000);
+            system("CLS");
+        }
     }
 }
 
